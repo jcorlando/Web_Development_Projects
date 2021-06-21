@@ -4,6 +4,8 @@ from flask_cors import CORS
 import pandas as pd
 import yfinance as yf
 import numpy as np
+import json
+import datetime
 
 app = Flask(__name__)
 CORS(app)
@@ -60,8 +62,24 @@ def get_api_data():
     hour_data = yf.download(_TICKER_, period="1y", interval="1h", progress=False)
     day_data = yf.download(_TICKER_, period="max", progress=False)
     ################## Donwload Data Using the Supplied Constant ##################
+    
+    x_axis_data = (minute_data.index.tolist())[_MINPERIOD_:]
 
-    return("Hello From Python API")
+    i = 0
+    json_return = '{"data_1_1_x":['
+    while i < len(x_axis_data):
+        json_return = json_return + '"' + str(x_axis_data[i])[0:16] + '"'
+        if(i != len(x_axis_data) - 1):
+            json_return = json_return + ', '
+        i = i + 1
+    json_return = json_return + "],"
+
+    y_axis_data = json.dumps((pd.Series(minute_data['Close']).tolist())[_MINPERIOD_:])
+
+    json_return = json_return + ' "data_1_1_y":' + y_axis_data
+
+    json_return = json_return + "}"
+    return(json_return)
 
 
 if __name__ == "__main__":
