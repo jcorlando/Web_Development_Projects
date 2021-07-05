@@ -2,13 +2,29 @@
 import yahooFinance from 'yahoo-finance2';
 
 
+// Construct date-time string
+const delta_date = new Date();
+delta_date.setDate(delta_date.getDate() - 6);
+
+delta_date.toISOString().split('T')[0];
+
+
 
 const query = 'DOGE-USD';
-const queryOptions = { period1: '2021-07-01', /* ... */ }; // From current date until "period1"
+const queryOptions = { period1: delta_date, /* ... */ }; // From current date until "period1"
 const result = await yahooFinance.historical(query, queryOptions);
 
 
 
-console.log(result);
+
+for(var i = 0; i < result.length; i++)
+{
+	var frame = result[i];
+	var date = frame.date;
+	var close = frame.close;
+	console.log(date, close);
+}
+
+
 
 
