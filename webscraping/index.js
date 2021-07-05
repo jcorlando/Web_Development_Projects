@@ -1,10 +1,12 @@
-const yahooFinance = require('yahoo-finance2').default;
+
+import yahooFinance from 'yahoo-finance2';
 
 
 
+const results = await yahooFinance.search('AAPL');
+
+console.log(results);
 
 
-
-
-console.log("The End Of The Script");
+console.log("\nReached The End Of The Script");
 
