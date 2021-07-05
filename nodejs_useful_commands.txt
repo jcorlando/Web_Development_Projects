@@ -3,3 +3,10 @@ node hellonode.js
 
 node checksum.js
 
+npm init -y
+
+
+npm i cheerio
+npm i axios
+
+
