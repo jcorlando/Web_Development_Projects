@@ -1,4 +1,3 @@
-
 import yahooFinance from 'yahoo-finance2';
 
 async function getdata()
@@ -22,10 +21,11 @@ async function getdata()
 		date.push(result[i].date.toISOString().split('T')[0]);
 		close.push(result[i].close);
 	}
+	
+	return { date, close }
+}
+
+let results = await getdata();
 
 
-} // End Of Async Function "getdata()"
-
-
-getdata();
 
