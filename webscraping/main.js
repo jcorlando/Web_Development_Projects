@@ -1,4 +1,6 @@
 import yahooFinance from 'yahoo-finance2';
+import express from 'express';
+
 
 async function getdata()
 {
@@ -25,7 +27,22 @@ async function getdata()
 	return { date, close }
 }
 
-let results = await getdata();
+
+const app = express()
+const port = 3000
+
+app.get('/', async (req, res) => 
+{
+	let results = await getdata();
+	res.send(results);
+})
+
+app.listen(port, () => { })
+
+
+
+
+
 
 
 
