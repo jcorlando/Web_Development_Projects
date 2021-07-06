@@ -10,17 +10,8 @@ function ready()
 }
 
 
-function calculate_moving_average(data)
-{
-	console.log(data);
-}
-
-
 function callback(data)
 {
-	
-	 calculate_moving_average(data);
-
 	//----------------------------------Chart 1------------------------------------------------
 	let myChart = document.getElementById('myChart').getContext('2d');
 
@@ -29,58 +20,50 @@ function callback(data)
         type: 'line', 
         data:
         {
-            labels:data.date,
+			labels:data.date.slice(2007, data.date.length),
             
             datasets:
             [
 				{
                 	label: 'Original Data',
-                	borderColor: 'violet',
-                	backgroundColor: 'violet',
+                	borderColor: 'blue',
+                	backgroundColor: 'blue',
                 	pointRadius: 0,
                 	borderWidth: 1,
-                	data: data.close
+                	data: data.close.slice(2007, data.close.length)
             	},
-//				{
-//                	label: '2 Hr Moving Average',
-//                	borderColor: 'indigo',
-//                	backgroundColor: 'indigo',
-//                	pointRadius: 0,
-//                	borderWidth: 1,
-//                	data: return_json.data_1_2_y
-//            	},
-//				{
-//                	label: '4 Hr Moving Average',
-//                	borderColor: 'blue',
-//                	backgroundColor: 'blue',
-//                	pointRadius: 0,
-//                	borderWidth: 1,
-//                	data: return_json.data_1_3_y
-//            	},
-//				{
-//                	label: '8 Hr Moving Average',
-//                	borderColor: 'green',
-//                	backgroundColor: 'green',
-//                	pointRadius: 0,
-//                	borderWidth: 1,
-//                	data: return_json.data_1_4_y
-//            	},
-//				{
-//                	label: '16 Hr Moving Average',
-//                	borderColor: 'yellow',
-//                	backgroundColor: 'yellow',
-//                	pointRadius: 0,
-//                	borderWidth: 1,
-//                	data: return_json.data_1_5_y
-//            	},
-//				{
-//                	label: '32 Hr Moving Average',
-//                	borderColor: 'orange',
-//                	backgroundColor: 'orange',
-//                	pointRadius: 0,
-//                	borderWidth: 1,
-//                	data: return_json.data_1_6_y
-//            	}
+				{
+                	label: '5-Day Moving Average',
+                	borderColor: 'green',
+                	backgroundColor: 'green',
+                	pointRadius: 0,
+                	borderWidth: 1,
+                	data: data.five_day_moving_average.slice(2007, data.five_day_moving_average.length)
+            	},
+				{
+                	label: '10-Day Moving Average',
+                	borderColor: 'yellow',
+                	backgroundColor: 'yellow',
+                	pointRadius: 0,
+                	borderWidth: 1,
+                	data: data.ten_day_moving_average.slice(2007, data.ten_day_moving_average.length)
+            	},
+				{
+                	label: '20-Day Moving Average',
+                	borderColor: 'orange',
+                	backgroundColor: 'orange',
+                	pointRadius: 0,
+                	borderWidth: 1,
+                	data: data.twenty_day_moving_average.slice(2007, data.twenty_day_moving_average.length)
+            	},
+				{
+                	label: '50-Day Moving Average',
+                	borderColor: 'red',
+                	backgroundColor: 'red',
+                	pointRadius: 0,
+                	borderWidth: 1,
+                	data: data.fifty_day_moving_average.slice(2007, data.fifty_day_moving_average.length)
+            	}
 			]
         },
         options:
